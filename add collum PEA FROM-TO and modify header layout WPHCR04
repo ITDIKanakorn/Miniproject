@@ -1,0 +1,890 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="WPHCR04" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="519" leftMargin="38" rightMargin="38" topMargin="42" bottomMargin="38" isSummaryWithPageHeaderAndFooter="true" uuid="a8bfa2ef-1c4d-46e0-85b2-de8581053df9">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="net.sf.jasperreports.export.xls.collapse.row.span" value="true"/>
+	<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+	<property name="net.sf.jasperreports.export.xls.remove.empty.space.between.columns" value="true"/>
+	<property name="net.sf.jasperreports.export.xls.remove.empty.space.between.rows" value="true"/>
+	<property name="net.sf.jasperreports.export.xls.auto.fit.row" value="true"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
+	<subDataset name="wareHouseDesc" uuid="3ce921cb-b7c7-4f39-b697-5b227bd51a7d">
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="280"/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="709"/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.xml"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="language" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="wareHouseCode" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="userId" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT SITSITCD+' - '+wms.pkgwmsutil_display_by_lang($P{language},SITEDESC,SITLDESC) AS  "SITEDESC" 
+FROM sitgnl
+WHERE SITSITCD = $P{wareHouseCode}]]>
+		</queryString>
+		<field name="SITEDESC" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="SITEDESC"/>
+			<property name="com.jaspersoft.studio.field.label" value="SITEDESC"/>
+		</field>
+	</subDataset>
+	<subDataset name="UserDesc" uuid="abdb1699-ec2b-4744-9a2d-75716a47c69f">
+		<parameter name="userId" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="language" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[select 	rmsUser.aduusr+' - '+ wms.pkgwmsutil_display_by_lang($P{language}, rmsUser.adudesc , rmsUser.aduldesc) "USERDESC"
+from 	admusr rmsUser
+where	rmsUser.aduusr = $P{userId}]]>
+		</queryString>
+		<field name="USERDESC" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="StatusDesc" uuid="8bf1137a-a716-422e-b3e2-cc06375eceae">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.xml"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="language" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="invStatus" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT TOP 1
+    CASE
+        WHEN  $P{invStatus} IS NOT NULL THEN  
+            wms.pkgwmsutil_display_by_lang($P{language}, param.pmdtbdedesc , param.pmdtbdldesc)
+        ELSE
+            wms.pkgwmsutil_display_by_lang($P{language}, prm.pmllngedesc  ,prm.pmllngldesc)
+    END  AS "STATUSDESC"
+FROM  wms.prmtbldtl param
+JOIN prmlang prm  ON prm.pmllngcd = 'L0019'
+WHERE param.PMDTBDTBNO = 9241
+and pmdtbdentcd = $P{invStatus}   OR   $P{invStatus}   IS NULL;]]>
+		</queryString>
+		<field name="STATUSDESC" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="STATUSDESC"/>
+			<property name="com.jaspersoft.studio.field.label" value="STATUSDESC"/>
+		</field>
+	</subDataset>
+	<subDataset name="Stotypfrom" uuid="66c7fe0b-cfbf-43cb-95cc-9481ca5d1a44">
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="0"/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="1000"/>
+		<parameter name="stoTypeFrom" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="language" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[select $P{stoTypeFrom} +' '+ (case $P{language} when 'E' then PMDTBDEDESC
+when 'L' then PMDTBDLDESC end) "STOTYPFROMDESC"
+from PRMTBLDTL
+where PMDTBDTBNO= 9041
+and PMDTBDENTCD=$P{stoTypeFrom}
+union
+select wms.pkgwmsutil_display_by_lang($P{language},'All','ทั้งหมด') "STOTYPFROMDESC"
+where $P{stoTypeFrom} is null]]>
+		</queryString>
+		<field name="STOTYPFROMDESC" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="Stotypto" uuid="13feb5fb-7285-40ab-b12f-abf5e0d66113">
+		<parameter name="stoTypeTo" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="language" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[select (CASE $P{stoTypeTo} WHEN '' THEN 'End' WHEN PMDTBDENTCD THEN stotypdesc ELSE 'End' END ) "STOTYPTODESC" from (select TOP 1(CAST(PMDTBDENTCD AS VARCHAR)+' '+ wms.pkgwmsutil_display_by_lang($P{language},PMDTBDEDESC,PMDTBDLDESC)) stotypdesc ,PMDTBDENTCD
+from PRMTBLDTL
+where PMDTBDTBNO= 9041
+and PMDTBDENTCD=coalesce ($P{stoTypeTo},PMDTBDENTCD)
+)A]]>
+		</queryString>
+		<field name="STOTYPTODESC" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="cntparamDesc" uuid="886ac513-d0b5-4f42-a258-29e9920441a7">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.xml"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="227"/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="762"/>
+		<parameter name="countingType" class="java.lang.String"/>
+		<parameter name="language" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[SELECT TOP 1
+    CASE
+        WHEN  $P{countingType}  IS NOT NULL THEN  
+            wms.pkgwmsutil_display_by_lang($P{language}, param.pmdtbdedesc , param.pmdtbdldesc)
+        ELSE
+            wms.pkgwmsutil_display_by_lang($P{language}, prm.pmllngedesc  ,prm.pmllngldesc)
+    END  AS "CNTPARAMDESC"
+FROM  wms.prmtbldtl param
+JOIN prmlang prm  ON prm.pmllngcd = 'L0019'
+WHERE param.PMDTBDTBNO = 9244
+and pmdtbdentcd = $P{countingType}   OR   $P{countingType}   IS NULL;]]>
+		</queryString>
+		<field name="CNTPARAMDESC" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="CNTPARAMDESC"/>
+			<property name="com.jaspersoft.studio.field.label" value="CNTPARAMDESC"/>
+		</field>
+	</subDataset>
+	<subDataset name="stoparamDesc" uuid="c68fc22d-5aef-4aa4-aaee-53570556ec64">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.xml"/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="332"/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="656"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="stoTypeFROM" class="java.lang.String"/>
+		<parameter name="warehouseCode" class="java.lang.String"/>
+		<parameter name="language" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[SELECT TOP 1
+    CASE
+        WHEN $P{stoTypeFROM} IS NOT NULL THEN  
+            stw. stwstgtyp+' - '+stw.stwstgname
+        ELSE
+            wms.pkgwmsutil_display_by_lang($P{language}, prm.pmllngedesc  ,prm.pmllngldesc)
+    END  AS "STOPARAMDESC"
+FROM wstgtypwh stw
+JOIN prmlang prm  ON prm.pmllngcd = 'L0019'
+WHERE stw.stwwhcd = $P{warehouseCode}  
+     AND stw. stwstgtyp = $P{stoTypeFROM}  OR   $P{stoTypeFROM} IS NULL;]]>
+		</queryString>
+		<field name="STOPARAMDESC" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="STOPARAMDESC"/>
+			<property name="com.jaspersoft.studio.field.label" value="STOPARAMDESC"/>
+		</field>
+	</subDataset>
+	<subDataset name="stgtypeGroup" uuid="a015a29b-9866-40d8-9ebc-778cf9e1d958">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.xml"/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="471"/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="523"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="warehouseCode" class="java.lang.String"/>
+		<parameter name="stoTypeFROM" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[SELECT stw. stwstgtyp+' - '+stw.stwstgname AS "STOPARAMDESC"
+FROM wstgtypwh stw
+WHERE stw.stwwhcd = $P{warehouseCode} 
+     AND stw. stwstgtyp = $P{stoTypeFROM}]]>
+		</queryString>
+		<field name="STOPARAMDESC" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="STOPARAMDESC"/>
+			<property name="com.jaspersoft.studio.field.label" value="STOPARAMDESC"/>
+		</field>
+	</subDataset>
+	<parameter name="stoTypeTo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="sto" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="invDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="isDisplayCompanyName" class="java.lang.Boolean" isForPrompting="false">
+		<defaultValueExpression><![CDATA[true]]></defaultValueExpression>
+	</parameter>
+	<parameter name="isDisplayCompanyLogoOnLeft" class="java.lang.Boolean" isForPrompting="false">
+		<defaultValueExpression><![CDATA[true]]></defaultValueExpression>
+	</parameter>
+	<parameter name="isDisplayCompanyLogoOnRight" class="java.lang.Boolean" isForPrompting="false">
+		<defaultValueExpression><![CDATA[false]]></defaultValueExpression>
+	</parameter>
+	<parameter name="language" class="java.lang.String">
+		<defaultValueExpression><![CDATA["B"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="wareHouseCode" class="java.lang.String"/>
+	<parameter name="reportId" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["PHCR02"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="repeatCriteria" class="java.lang.Boolean" isForPrompting="false">
+		<defaultValueExpression><![CDATA[false]]></defaultValueExpression>
+	</parameter>
+	<parameter name="userId" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["RMS_USER"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="invStatus" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="printingCriteria" class="java.lang.String"/>
+	<parameter name="inv_No_FROM" class="java.lang.String"/>
+	<parameter name="inv_No_To" class="java.lang.String"/>
+	<parameter name="invType" class="java.lang.String"/>
+	<parameter name="outputFormat" class="java.lang.String"/>
+	<parameter name="invTypeDesc" class="java.lang.String"/>
+	<parameter name="invStatusDesc" class="java.lang.String"/>
+	<parameter name="reportName" class="java.lang.String"/>
+	<queryString language="plsql">
+		<![CDATA[EXEC [wms_report_wphcr04]
+$P{wareHouseCode}
+,$P{stoTypeTo}
+,$P{invType}
+,$P{invDate}
+,$P{invStatus}
+,$P{inv_No_FROM}
+,$P{inv_No_To}
+,$P{language}
+,$P{userId}]]>
+	</queryString>
+	<field name="INVENTORY_NO" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="INVENTORY_NO"/>
+		<property name="com.jaspersoft.studio.field.label" value="INVENTORY_NO"/>
+	</field>
+	<field name="INV_DESCRIPTION" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="INV_DESCRIPTION"/>
+		<property name="com.jaspersoft.studio.field.label" value="INV_DESCRIPTION"/>
+	</field>
+	<field name="INV_STATUS" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="INV_STATUS"/>
+		<property name="com.jaspersoft.studio.field.label" value="INV_STATUS"/>
+	</field>
+	<field name="STO_TYPE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="STO_TYPE"/>
+		<property name="com.jaspersoft.studio.field.label" value="STO_TYPE"/>
+	</field>
+	<field name="STO_BIN" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="STO_BIN"/>
+		<property name="com.jaspersoft.studio.field.label" value="STO_BIN"/>
+	</field>
+	<field name="BIN_DESC" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="BIN_DESC"/>
+		<property name="com.jaspersoft.studio.field.label" value="BIN_DESC"/>
+	</field>
+	<field name="ITEMCODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="ITEMCODE"/>
+		<property name="com.jaspersoft.studio.field.label" value="ITEMCODE"/>
+	</field>
+	<field name="ITMCD_DESC" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="ITMCD_DESC"/>
+		<property name="com.jaspersoft.studio.field.label" value="ITMCD_DESC"/>
+	</field>
+	<field name="BATCH_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="BATCH_NAME"/>
+		<property name="com.jaspersoft.studio.field.label" value="BATCH_NAME"/>
+	</field>
+	<field name="STK_UNIT" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="STK_UNIT"/>
+		<property name="com.jaspersoft.studio.field.label" value="STK_UNIT"/>
+	</field>
+	<field name="CNT_TYPE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="CNT_TYPE"/>
+		<property name="com.jaspersoft.studio.field.label" value="CNT_TYPE"/>
+	</field>
+	<field name="INV_DATE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="INV_DATE"/>
+		<property name="com.jaspersoft.studio.field.label" value="INV_DATE"/>
+	</field>
+	<field name="PEA_NO_FROM" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="PEA_NO_FROM"/>
+		<property name="com.jaspersoft.studio.field.label" value="PEA_NO_FROM"/>
+	</field>
+	<field name="PEA_NO_TO" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="PEA_NO_TO"/>
+		<property name="com.jaspersoft.studio.field.label" value="PEA_NO_TO"/>
+	</field>
+	<sortField name="INVENTORY_NO"/>
+	<sortField name="STO_TYPE"/>
+	<sortField name="STO_BIN"/>
+	<sortField name="ITEMCODE"/>
+	<sortField name="BATCH_NAME"/>
+	<variable name="variable1" class="java.lang.Number" incrementType="Report">
+		<variableExpression><![CDATA[$V{PAGE_NUMBER}]]></variableExpression>
+		<initialValueExpression><![CDATA[$V{PAGE_NUMBER}]]></initialValueExpression>
+	</variable>
+	<group name="Group2" isStartNewPage="true" isReprintHeaderOnEachPage="true">
+		<groupExpression><![CDATA[$P{outputFormat}.equals("2")?$F{INVENTORY_NO}+$F{STO_TYPE}:' ']]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="105" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<frame>
+				<reportElement x="0" y="0" width="519" height="60" isRemoveLineWhenBlank="true" uuid="0c211b8e-9f69-46e6-bf12-9fc11d4aefd4">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textField isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="519" height="30" isRemoveLineWhenBlank="true" uuid="9f104eed-c64e-44d5-ace9-b83708d13a6c">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Angsana New" size="16" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{reportName}]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="0" y="45" width="66" height="15" isRemoveLineWhenBlank="true" uuid="c170a7c8-9390-46ae-904c-563d83a0901b">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Angsana New" size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[com.ss.wms.util.ReportBilingualUtils.getMessageByLang("L1240",$P{language})+" : "]]></textFieldExpression>
+				</textField>
+				<componentElement>
+					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="66" y="45" width="284" height="15" isRemoveLineWhenBlank="true" uuid="6412668d-bf64-454c-9347-f11de66aa2fe">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+						<datasetRun subDataset="UserDesc" uuid="8d463c03-848b-47c6-828a-155db0cfe8f7">
+							<datasetParameter name="userId">
+								<datasetParameterExpression><![CDATA[$P{userId}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="language">
+								<datasetParameterExpression><![CDATA[$P{language}]]></datasetParameterExpression>
+							</datasetParameter>
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+						<jr:listContents height="15" width="284">
+							<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+								<reportElement positionType="Float" stretchType="ElementGroupHeight" x="0" y="0" width="284" height="15" isRemoveLineWhenBlank="true" uuid="5b5f774b-882a-48c6-b6cf-e9556fb62939">
+									<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+								</reportElement>
+								<textElement textAlignment="Left" verticalAlignment="Middle">
+									<font fontName="Angsana New" size="12"/>
+									<paragraph leftIndent="0"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{USERDESC}]]></textFieldExpression>
+							</textField>
+						</jr:listContents>
+					</jr:list>
+				</componentElement>
+				<textField textAdjust="StretchHeight" pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="433" y="45" width="86" height="15" isRemoveLineWhenBlank="true" uuid="9f8f2369-6c5f-4827-bf1a-f1a1f890b93f">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box leftPadding="0"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Angsana New" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="0" y="30" width="66" height="15" isRemoveLineWhenBlank="true" uuid="c505b580-742a-4866-9caa-ac3015384770">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Angsana New" size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[com.ss.wms.util.ReportBilingualUtils.getMessageByLang("L1239",$P{language})+" : "]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight" evaluationTime="Report" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="66" y="30" width="284" height="15" isRemoveLineWhenBlank="true" uuid="018ca5b1-0d78-45fc-a6a0-b438251886e5">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Angsana New" size="12"/>
+						<paragraph leftIndent="0"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{reportId}]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Master" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="433" y="30" width="86" height="15" isRemoveLineWhenBlank="true" uuid="57b9afc2-823f-469a-a17b-56013dd7ec32">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box leftPadding="0"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Angsana New" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{MASTER_CURRENT_PAGE}+" / "+$V{MASTER_TOTAL_PAGES}]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="350" y="45" width="83" height="15" isRemoveLineWhenBlank="true" uuid="9ba09720-84fb-4c40-9ba1-348ff1c83959">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box leftPadding="0"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Angsana New" size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[com.ss.wms.util.ReportBilingualUtils.getMessageByLang("L1241",$P{language})+" : "]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="350" y="30" width="83" height="15" isRemoveLineWhenBlank="true" uuid="d0e0f6f4-a250-4e86-9eaf-401400d4478c">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box leftPadding="0"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Angsana New" size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[com.ss.wms.util.ReportBilingualUtils.getMessageByLang("L0350",$P{language})+" : "]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="60" width="519" height="45" isRemoveLineWhenBlank="true" uuid="3a441552-81c0-405d-ac47-203cffa6062b">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<printWhenExpression><![CDATA[($V{PAGE_NUMBER}.equals(1) ? true : false)]]></printWhenExpression>
+				</reportElement>
+				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="350" y="30" width="83" height="15" uuid="11aad9bb-7400-4da6-92e2-812dac3cc5c6">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<printWhenExpression><![CDATA[($V{PAGE_NUMBER}.equals(1) ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<box leftPadding="0">
+						<bottomPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font fontName="Angsana New" size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[com.ss.wms.util.ReportBilingualUtils.getMessageByLang("L7232", $P{language})+" : "]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="0" y="30" width="66" height="15" uuid="e22a8638-c2ec-4f73-9662-8cab637b79db">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<printWhenExpression><![CDATA[($V{PAGE_NUMBER}.equals(1) ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<bottomPen lineWidth="0.75"/>
+					</box>
+					<textElement verticalAlignment="Top">
+						<font fontName="Angsana New" size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[com.ss.wms.util.ReportBilingualUtils.getMessageByLang("L0141",$P{language})+" : "]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="433" y="30" width="86" height="15" uuid="03262638-bc1f-4059-b610-fd43ded94c24">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<printWhenExpression><![CDATA[($V{PAGE_NUMBER}.equals(1) ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<bottomPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font fontName="Angsana New" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{invStatusDesc} == null?(com.ss.wms.util.ReportBilingualUtils.getMessageByLang("L0019", $P{language})):
+$P{invStatusDesc}]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="0" y="0" width="66" height="15" uuid="6473c938-1a60-4c45-af4e-f11c53463971">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<printWhenExpression><![CDATA[($V{PAGE_NUMBER}.equals(1) ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Top" markup="html">
+						<font fontName="Angsana New" size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[com.ss.wms.util.ReportBilingualUtils.getMessageByLang("L9215",$P{language})+" : "]]></textFieldExpression>
+				</textField>
+				<componentElement>
+					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="66" y="0" width="84" height="15" uuid="469aaf2c-6781-423a-bd6b-860f3f689b26">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<printWhenExpression><![CDATA[($V{PAGE_NUMBER}.equals(1) ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+						<datasetRun subDataset="wareHouseDesc" uuid="08b894fe-fef5-4f39-84f2-89ef15ce66e6">
+							<datasetParameter name="language">
+								<datasetParameterExpression><![CDATA[$P{language}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="wareHouseCode">
+								<datasetParameterExpression><![CDATA[$P{wareHouseCode}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="userId">
+								<datasetParameterExpression><![CDATA[$P{userId}]]></datasetParameterExpression>
+							</datasetParameter>
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+						<jr:listContents height="15" width="84">
+							<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+								<reportElement positionType="Float" stretchType="ElementGroupHeight" x="0" y="0" width="84" height="15" isRemoveLineWhenBlank="true" uuid="7d26545a-d79b-420e-80a5-7ecb82073b3f">
+									<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+								</reportElement>
+								<box>
+									<topPen lineWidth="0.75"/>
+								</box>
+								<textElement verticalAlignment="Bottom">
+									<font fontName="Angsana New" size="12"/>
+									<paragraph leftIndent="0"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{SITEDESC}]]></textFieldExpression>
+							</textField>
+						</jr:listContents>
+					</jr:list>
+				</componentElement>
+				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="0" y="15" width="66" height="15" uuid="08109d4e-63b3-40cf-9fc5-a5a77b982bef">
+						<printWhenExpression><![CDATA[($V{PAGE_NUMBER}.equals(1) ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font fontName="Angsana New" size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[com.ss.wms.util.ReportBilingualUtils.getMessageByLang("L9829",$P{language}) + " : "]]></textFieldExpression>
+				</textField>
+				<componentElement>
+					<reportElement positionType="Float" x="66" y="15" width="84" height="15" uuid="4ded475c-5f72-4df8-aed1-8bc002541c2e">
+						<printWhenExpression><![CDATA[($V{PAGE_NUMBER}.equals(1) ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+						<datasetRun subDataset="stoparamDesc" uuid="f62850c2-3f18-44b7-bfcb-70b0ac8a2ddd">
+							<datasetParameter name="stoTypeFROM">
+								<datasetParameterExpression><![CDATA[$P{stoTypeTo}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="language">
+								<datasetParameterExpression><![CDATA[$P{language}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="warehouseCode">
+								<datasetParameterExpression><![CDATA[$P{wareHouseCode}]]></datasetParameterExpression>
+							</datasetParameter>
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+						<jr:listContents height="15" width="84">
+							<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+								<reportElement positionType="Float" stretchType="ElementGroupHeight" x="0" y="0" width="84" height="15" isRemoveLineWhenBlank="true" uuid="ab93518c-f916-45c8-893d-9436b7fddcf8">
+									<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+								</reportElement>
+								<textElement textAlignment="Left" verticalAlignment="Top">
+									<font fontName="Angsana New" size="12"/>
+									<paragraph leftIndent="0"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{STOPARAMDESC}]]></textFieldExpression>
+							</textField>
+						</jr:listContents>
+					</jr:list>
+				</componentElement>
+				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="150" y="0" width="120" height="15" uuid="2f5dd1fd-653b-4220-b874-0911be3357ed">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<printWhenExpression><![CDATA[($V{PAGE_NUMBER}.equals(1) ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font fontName="Angsana New" size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[com.ss.wms.util.ReportBilingualUtils.getMessageByLang("L10145",$P{language}) + " : "]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="270" y="0" width="80" height="15" uuid="02c24843-7b4e-478b-9599-69fc4fc937ac">
+						<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+						<printWhenExpression><![CDATA[($V{PAGE_NUMBER}.equals(1) ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font fontName="Angsana New" size="12" isBold="false"/>
+						<paragraph leftIndent="0"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{invTypeDesc} == null ? (com.ss.wms.util.ReportBilingualUtils.getMessageByLang("L0019", $P{language})):$P{invTypeDesc}]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="350" y="0" width="83" height="15" uuid="584528cf-b023-405d-9f44-e1660661d923">
+						<printWhenExpression><![CDATA[($V{PAGE_NUMBER}.equals(1) ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<box leftPadding="0">
+						<topPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font fontName="Angsana New" size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[com.ss.wms.util.ReportBilingualUtils.getMessageByLang("L10298",$P{language}) + " : "]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight" pattern="dd/MM/yyyy" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="433" y="0" width="86" height="15" uuid="7c4c8e4d-7f5e-4755-8af4-932d2b99d849">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<printWhenExpression><![CDATA[($V{PAGE_NUMBER}.equals(1) ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font fontName="Angsana New" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{invDate} == null?(com.ss.wms.util.ReportBilingualUtils.getMessageByLang("L0019", $P{language})):
+$P{invDate}]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="270" y="15" width="80" height="15" uuid="ff9225cf-dd66-456c-b754-58b515699252">
+						<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+						<printWhenExpression><![CDATA[($V{PAGE_NUMBER}.equals(1) ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Top">
+						<font fontName="Angsana New" size="12"/>
+						<paragraph leftIndent="0"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{inv_No_FROM} == null ? (com.ss.wms.util.ReportBilingualUtils.getMessageByLang("L0546", $P{language})): $P{inv_No_FROM}]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="350" y="15" width="83" height="15" uuid="adf30b11-1575-4ebb-8155-3020b2676671">
+						<printWhenExpression><![CDATA[($V{PAGE_NUMBER}.equals(1) ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<box leftPadding="0"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font fontName="Angsana New" size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[com.ss.wms.util.ReportBilingualUtils.getMessageByLang("L1242",$P{language})+" : "]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="433" y="15" width="86" height="15" uuid="536a24c0-5fd3-45d3-bf19-c63d520019f9">
+						<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+						<printWhenExpression><![CDATA[($V{PAGE_NUMBER}.equals(1) ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Top">
+						<font fontName="Angsana New" size="12"/>
+						<paragraph leftIndent="0"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{inv_No_To} == null ?(com.ss.wms.util.ReportBilingualUtils.getMessageByLang("L0154", $P{language})):$P{inv_No_To}]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight" evaluationTime="Report" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="150" y="15" width="120" height="15" uuid="70182de3-2f7e-44d7-9f46-f73c978f555f">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<printWhenExpression><![CDATA[($V{PAGE_NUMBER}.equals(1) ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Top">
+						<font fontName="Angsana New" size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[com.ss.wms.util.ReportBilingualUtils.getMessageByLang("L10297",$P{language})+" : "]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="66" y="30" width="284" height="15" uuid="f581befe-2fbf-4ee2-96e3-b89162ea0f87">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+						<printWhenExpression><![CDATA[($V{PAGE_NUMBER}.equals(1) ? true : false)]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement verticalAlignment="Top">
+						<font fontName="Angsana New" size="12"/>
+						<paragraph leftIndent="0"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{INV_DESCRIPTION} == null ? " ":$F{INV_DESCRIPTION}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="15">
+			<frame>
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="0" y="0" width="519" height="15" uuid="33c84090-24ac-45f9-bee8-1135bb9422e8">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textField textAdjust="StretchHeight">
+					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="300" y="0" width="50" height="15" uuid="f0e10339-ba3a-448d-b468-c371a561bc49">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Angsana New" size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[com.ss.wms.util.ReportBilingualUtils.getMessageByLang("L10115",$P{language})]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight">
+					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="0" y="0" width="66" height="15" uuid="f982dfda-d17e-4682-af77-c8e2b53d12c9">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Angsana New" size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[com.ss.wms.util.ReportBilingualUtils.getMessageByLang("L9830",$P{language})]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight">
+					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="150" y="0" width="120" height="15" uuid="eb432d00-d882-4e39-b989-3ab3f02724bf">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Angsana New" size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[com.ss.wms.util.ReportBilingualUtils.getMessageByLang("L9464",$P{language})]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight">
+					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="66" y="0" width="84" height="15" uuid="e4b92c47-2ff8-4f17-96ad-366001337742">
+						<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Angsana New" size="12" isBold="true"/>
+						<paragraph leftIndent="0" spacingBefore="0"/>
+					</textElement>
+					<textFieldExpression><![CDATA[com.ss.wms.util.ReportBilingualUtils.getMessageByLang("L9463",$P{language})]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight">
+					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="270" y="0" width="30" height="15" uuid="977caad3-81b1-4564-8664-7570ceb6eec7">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Angsana New" size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[com.ss.wms.util.ReportBilingualUtils.getMessageByLang("L9841",$P{language})]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight">
+					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="350" y="0" width="83" height="15" uuid="40e37227-9355-48a5-905f-5e4639092a2e">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Angsana New" size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[com.ss.wms.util.ReportBilingualUtils.getMessageByLang("L10139",$P{language})]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight">
+					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="433" y="0" width="86" height="15" uuid="e1450cb1-f560-48c9-880f-7c4293794204">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Angsana New" size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[com.ss.wms.util.ReportBilingualUtils.getMessageByLang("L10140",$P{language})]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Prevent">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<frame>
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="0" y="0" width="519" height="15" isRemoveLineWhenBlank="true" uuid="b6f2a058-0b6a-4354-938c-acb2c6a5efd9">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+					<reportElement stretchType="ElementGroupHeight" x="0" y="0" width="66" height="15" uuid="73c56a78-5e56-4785-88db-3d6cd30fb8fd">
+						<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font fontName="Angsana New" size="12"/>
+						<paragraph spacingBefore="0"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{STO_BIN} + " - " + $F{BIN_DESC}]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+					<reportElement stretchType="ElementGroupHeight" x="66" y="0" width="84" height="15" uuid="51a18fd6-aac0-485c-a578-24b0d4917595">
+						<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Angsana New" size="12"/>
+						<paragraph leftIndent="0" spacingBefore="0"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{ITEMCODE}]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+					<reportElement stretchType="ElementGroupHeight" x="150" y="0" width="120" height="15" uuid="90819688-1897-4501-b30c-0969c6f56d44">
+						<property name="net.sf.jasperreports.export.xls.wrap.text" value="false"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement verticalAlignment="Top">
+						<font fontName="Angsana New" size="12"/>
+						<paragraph spacingBefore="0"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{ITMCD_DESC}.trim()]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+					<reportElement stretchType="ElementGroupHeight" x="300" y="0" width="50" height="15" uuid="21acc562-8139-47b1-b039-b17bf94bb3ed">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Angsana New" size="12"/>
+						<paragraph spacingBefore="0"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{STK_UNIT}]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight" isBlankWhenNull="false">
+					<reportElement stretchType="ElementGroupHeight" x="270" y="0" width="30" height="15" uuid="523be486-ec04-482e-ae67-c3a57cc609c7">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Angsana New" size="12"/>
+						<paragraph spacingBefore="0"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{BATCH_NAME} == "N/A" || $F{BATCH_NAME} == null ? " " : $F{BATCH_NAME}]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+					<reportElement stretchType="ElementGroupHeight" x="350" y="0" width="83" height="15" uuid="f2aa8643-fdf1-4d34-bedb-3ed9c61771aa">
+						<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Angsana New" size="12"/>
+						<paragraph spacingBefore="0"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{PEA_NO_FROM}]]></textFieldExpression>
+				</textField>
+				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+					<reportElement stretchType="ElementGroupHeight" x="433" y="0" width="86" height="15" uuid="3032e4b2-fec6-4367-aeef-ec4f35e1553f">
+						<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Angsana New" size="12"/>
+						<paragraph spacingBefore="0"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{PEA_NO_TO}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45">
+			<textField>
+				<reportElement x="0" y="0" width="519" height="15" uuid="e8da5b36-816e-4669-9724-c87508131dff">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="15" width="519" height="15" uuid="28a78f7a-4b39-496b-9e4f-4151858d8fa0">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="30" width="519" height="15" uuid="9841aa0e-7901-4393-b6ae-31bd149c1a3e">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" "]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+</jasperReport>
