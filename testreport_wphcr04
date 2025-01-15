@@ -525,20 +525,20 @@ $P{wareHouseCode}
 					<printWhenExpression><![CDATA[$P{outputFormat}.equals( "1" )?  ($V{PAGE_NUMBER}.equals(1) ? true : false) : ($P{printingCriteria}.equals("1")?true:$V{PAGE_NUMBER}.equals(1)?true:false)]]></printWhenExpression>
 				</reportElement>
 				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="380" y="30" width="70" height="15" uuid="11aad9bb-7400-4da6-92e2-812dac3cc5c6">
+					<reportElement positionType="Float" x="380" y="30" width="70" height="15" uuid="11aad9bb-7400-4da6-92e2-812dac3cc5c6">
 						<property name="com.jaspersoft.studio.unit.y" value="px"/>
 						<printWhenExpression><![CDATA[($V{PAGE_NUMBER}.equals(1) ? true : false)]]></printWhenExpression>
 					</reportElement>
 					<box leftPadding="0">
 						<bottomPen lineWidth="0.75"/>
 					</box>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
+					<textElement textAlignment="Left" verticalAlignment="Top">
 						<font fontName="Angsana New" size="12" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[com.ss.wms.util.ReportBilingualUtils.getMessageByLang("L7232", $P{language})+" : "]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="0" y="30" width="94" height="15" uuid="e22a8638-c2ec-4f73-9662-8cab637b79db">
+					<reportElement positionType="Float" x="0" y="30" width="94" height="15" uuid="e22a8638-c2ec-4f73-9662-8cab637b79db">
 						<property name="com.jaspersoft.studio.unit.y" value="px"/>
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 						<printWhenExpression><![CDATA[($V{PAGE_NUMBER}.equals(1) ? true : false)]]></printWhenExpression>
@@ -546,13 +546,13 @@ $P{wareHouseCode}
 					<box>
 						<bottomPen lineWidth="0.75"/>
 					</box>
-					<textElement verticalAlignment="Middle">
+					<textElement verticalAlignment="Top">
 						<font fontName="Angsana New" size="12" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[com.ss.wms.util.ReportBilingualUtils.getMessageByLang("L0141",$P{language})+" : "]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="450" y="30" width="69" height="15" uuid="03262638-bc1f-4059-b610-fd43ded94c24">
+					<reportElement positionType="Float" x="450" y="30" width="69" height="15" uuid="03262638-bc1f-4059-b610-fd43ded94c24">
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 						<property name="com.jaspersoft.studio.unit.y" value="px"/>
 						<printWhenExpression><![CDATA[($V{PAGE_NUMBER}.equals(1) ? true : false)]]></printWhenExpression>
@@ -560,7 +560,7 @@ $P{wareHouseCode}
 					<box>
 						<bottomPen lineWidth="0.75"/>
 					</box>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
+					<textElement textAlignment="Left" verticalAlignment="Top">
 						<font fontName="Angsana New" size="12"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$P{invStatusDesc} == null?(com.ss.wms.util.ReportBilingualUtils.getMessageByLang("L0019", $P{language})):
@@ -574,7 +574,7 @@ $P{invStatusDesc}]]></textFieldExpression>
 					<box>
 						<topPen lineWidth="0.75"/>
 					</box>
-					<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<textElement textAlignment="Left" verticalAlignment="Top" markup="html">
 						<font fontName="Angsana New" size="12" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[com.ss.wms.util.ReportBilingualUtils.getMessageByLang("L9215",$P{language})+" : "]]></textFieldExpression>
@@ -605,7 +605,7 @@ $P{invStatusDesc}]]></textFieldExpression>
 								<box>
 									<topPen lineWidth="0.75"/>
 								</box>
-								<textElement verticalAlignment="Middle">
+								<textElement verticalAlignment="Top">
 									<font fontName="Angsana New" size="12"/>
 									<paragraph leftIndent="0"/>
 								</textElement>
@@ -615,16 +615,16 @@ $P{invStatusDesc}]]></textFieldExpression>
 					</jr:list>
 				</componentElement>
 				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="0" y="15" width="94" height="15" uuid="08109d4e-63b3-40cf-9fc5-a5a77b982bef">
+					<reportElement positionType="Float" x="0" y="15" width="94" height="15" uuid="08109d4e-63b3-40cf-9fc5-a5a77b982bef">
 						<printWhenExpression><![CDATA[($V{PAGE_NUMBER}.equals(1) ? true : false)]]></printWhenExpression>
 					</reportElement>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
+					<textElement textAlignment="Left" verticalAlignment="Top">
 						<font fontName="Angsana New" size="12" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[com.ss.wms.util.ReportBilingualUtils.getMessageByLang("L9829",$P{language}) + " : "]]></textFieldExpression>
 				</textField>
 				<componentElement>
-					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="94" y="15" width="92" height="15" uuid="4ded475c-5f72-4df8-aed1-8bc002541c2e">
+					<reportElement positionType="Float" x="94" y="15" width="92" height="15" uuid="4ded475c-5f72-4df8-aed1-8bc002541c2e">
 						<printWhenExpression><![CDATA[($V{PAGE_NUMBER}.equals(1) ? true : false)]]></printWhenExpression>
 					</reportElement>
 					<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
@@ -642,10 +642,10 @@ $P{invStatusDesc}]]></textFieldExpression>
 						</datasetRun>
 						<jr:listContents height="15" width="92">
 							<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-								<reportElement positionType="Float" stretchType="ElementGroupHeight" x="0" y="0" width="92" height="15" isRemoveLineWhenBlank="true" uuid="ab93518c-f916-45c8-893d-9436b7fddcf8">
+								<reportElement positionType="Float" x="0" y="0" width="92" height="15" isRemoveLineWhenBlank="true" uuid="ab93518c-f916-45c8-893d-9436b7fddcf8">
 									<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 								</reportElement>
-								<textElement verticalAlignment="Middle">
+								<textElement verticalAlignment="Top">
 									<font fontName="Angsana New" size="12"/>
 									<paragraph leftIndent="0"/>
 								</textElement>
@@ -662,7 +662,7 @@ $P{invStatusDesc}]]></textFieldExpression>
 					<box>
 						<topPen lineWidth="0.75"/>
 					</box>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
+					<textElement textAlignment="Left" verticalAlignment="Top">
 						<font fontName="Angsana New" size="12" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[com.ss.wms.util.ReportBilingualUtils.getMessageByLang("L10145",$P{language}) + " : "]]></textFieldExpression>
@@ -675,7 +675,7 @@ $P{invStatusDesc}]]></textFieldExpression>
 					<box>
 						<topPen lineWidth="0.75"/>
 					</box>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
+					<textElement textAlignment="Left" verticalAlignment="Top">
 						<font fontName="Angsana New" size="12" isBold="false"/>
 						<paragraph leftIndent="0"/>
 					</textElement>
@@ -688,7 +688,7 @@ $P{invStatusDesc}]]></textFieldExpression>
 					<box leftPadding="0">
 						<topPen lineWidth="0.75"/>
 					</box>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
+					<textElement textAlignment="Left" verticalAlignment="Top">
 						<font fontName="Angsana New" size="12" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[com.ss.wms.util.ReportBilingualUtils.getMessageByLang("L10298",$P{language}) + " : "]]></textFieldExpression>
@@ -701,56 +701,56 @@ $P{invStatusDesc}]]></textFieldExpression>
 					<box>
 						<topPen lineWidth="0.75"/>
 					</box>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
+					<textElement textAlignment="Left" verticalAlignment="Top">
 						<font fontName="Angsana New" size="12"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$P{invDate} == null?(com.ss.wms.util.ReportBilingualUtils.getMessageByLang("L0019", $P{language})):
 $P{invDate}]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="300" y="15" width="80" height="15" uuid="ff9225cf-dd66-456c-b754-58b515699252">
+					<reportElement positionType="Float" x="300" y="15" width="80" height="15" uuid="ff9225cf-dd66-456c-b754-58b515699252">
 						<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 						<printWhenExpression><![CDATA[($V{PAGE_NUMBER}.equals(1) ? true : false)]]></printWhenExpression>
 					</reportElement>
-					<textElement verticalAlignment="Middle">
+					<textElement verticalAlignment="Top">
 						<font fontName="Angsana New" size="12"/>
 						<paragraph leftIndent="0"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$P{inv_No_FROM} == null ? (com.ss.wms.util.ReportBilingualUtils.getMessageByLang("L0546", $P{language})) : $P{inv_No_FROM}]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="380" y="15" width="70" height="15" uuid="adf30b11-1575-4ebb-8155-3020b2676671">
+					<reportElement positionType="Float" x="380" y="15" width="70" height="15" uuid="adf30b11-1575-4ebb-8155-3020b2676671">
 						<printWhenExpression><![CDATA[($V{PAGE_NUMBER}.equals(1) ? true : false)]]></printWhenExpression>
 					</reportElement>
 					<box leftPadding="0"/>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
+					<textElement textAlignment="Left" verticalAlignment="Top">
 						<font fontName="Angsana New" size="12" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[com.ss.wms.util.ReportBilingualUtils.getMessageByLang("L1242",$P{language})+" : "]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="450" y="15" width="69" height="15" uuid="536a24c0-5fd3-45d3-bf19-c63d520019f9">
+					<reportElement positionType="Float" x="450" y="15" width="69" height="15" uuid="536a24c0-5fd3-45d3-bf19-c63d520019f9">
 						<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 						<printWhenExpression><![CDATA[($V{PAGE_NUMBER}.equals(1) ? true : false)]]></printWhenExpression>
 					</reportElement>
-					<textElement verticalAlignment="Middle">
+					<textElement verticalAlignment="Top">
 						<font fontName="Angsana New" size="12"/>
 						<paragraph leftIndent="0"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$P{inv_No_To} == null ?(com.ss.wms.util.ReportBilingualUtils.getMessageByLang("L0154", $P{language})):$P{inv_No_To}]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight" evaluationTime="Report" isBlankWhenNull="true">
-					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="186" y="15" width="114" height="15" uuid="70182de3-2f7e-44d7-9f46-f73c978f555f">
+					<reportElement positionType="Float" x="186" y="15" width="114" height="15" uuid="70182de3-2f7e-44d7-9f46-f73c978f555f">
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 						<printWhenExpression><![CDATA[($V{PAGE_NUMBER}.equals(1) ? true : false)]]></printWhenExpression>
 					</reportElement>
-					<textElement verticalAlignment="Middle">
+					<textElement verticalAlignment="Top">
 						<font fontName="Angsana New" size="12" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[com.ss.wms.util.ReportBilingualUtils.getMessageByLang("L10297",$P{language})+" : "]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="94" y="30" width="286" height="15" uuid="f581befe-2fbf-4ee2-96e3-b89162ea0f87">
+					<reportElement positionType="Float" x="94" y="30" width="286" height="15" uuid="f581befe-2fbf-4ee2-96e3-b89162ea0f87">
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 						<property name="com.jaspersoft.studio.unit.y" value="px"/>
 						<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
@@ -762,7 +762,7 @@ $P{invDate}]]></textFieldExpression>
 						<bottomPen lineWidth="0.75" lineStyle="Solid" lineColor="#000000"/>
 						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
-					<textElement verticalAlignment="Middle">
+					<textElement verticalAlignment="Top">
 						<font fontName="Angsana New" size="12"/>
 						<paragraph leftIndent="0"/>
 					</textElement>
@@ -784,7 +784,7 @@ $P{invDate}]]></textFieldExpression>
 					<textFieldExpression><![CDATA[$P{reportName}]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="0" y="45" width="94" height="15" isRemoveLineWhenBlank="true" uuid="4e9ffbd6-e8f8-495b-a9b6-6c3328ce3227">
+					<reportElement positionType="Float" x="0" y="45" width="94" height="15" isRemoveLineWhenBlank="true" uuid="4e9ffbd6-e8f8-495b-a9b6-6c3328ce3227">
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
@@ -794,7 +794,7 @@ $P{invDate}]]></textFieldExpression>
 					<textFieldExpression><![CDATA[com.ss.wms.util.ReportBilingualUtils.getMessageByLang("L1240",$P{language})+" : "]]></textFieldExpression>
 				</textField>
 				<componentElement>
-					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="94" y="45" width="286" height="15" isRemoveLineWhenBlank="true" uuid="9f54934d-f12c-4cb0-956e-233e434097cf">
+					<reportElement positionType="Float" x="94" y="45" width="286" height="15" isRemoveLineWhenBlank="true" uuid="9f54934d-f12c-4cb0-956e-233e434097cf">
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
 					<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
@@ -822,7 +822,7 @@ $P{invDate}]]></textFieldExpression>
 					</jr:list>
 				</componentElement>
 				<textField textAdjust="StretchHeight" pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
-					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="450" y="45" width="69" height="15" isRemoveLineWhenBlank="true" uuid="7c9741c8-00e9-49a3-8dc8-e90663728858">
+					<reportElement positionType="Float" x="450" y="45" width="69" height="15" isRemoveLineWhenBlank="true" uuid="7c9741c8-00e9-49a3-8dc8-e90663728858">
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
 					<box leftPadding="0"/>
@@ -832,7 +832,7 @@ $P{invDate}]]></textFieldExpression>
 					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
-					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="0" y="30" width="94" height="15" isRemoveLineWhenBlank="true" uuid="72656227-74bc-4e55-b0ae-bf5f5fb81bae">
+					<reportElement positionType="Float" x="0" y="30" width="94" height="15" isRemoveLineWhenBlank="true" uuid="72656227-74bc-4e55-b0ae-bf5f5fb81bae">
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
@@ -842,7 +842,7 @@ $P{invDate}]]></textFieldExpression>
 					<textFieldExpression><![CDATA[com.ss.wms.util.ReportBilingualUtils.getMessageByLang("L1239",$P{language})+" : "]]></textFieldExpression>
 				</textField>
 				<textField evaluationTime="Report" isBlankWhenNull="true">
-					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="94" y="30" width="286" height="15" isRemoveLineWhenBlank="true" uuid="8f1aca5f-3296-4580-a31f-3468d80e6315">
+					<reportElement positionType="Float" x="94" y="30" width="286" height="15" isRemoveLineWhenBlank="true" uuid="8f1aca5f-3296-4580-a31f-3468d80e6315">
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 						<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
@@ -854,7 +854,7 @@ $P{invDate}]]></textFieldExpression>
 					<textFieldExpression><![CDATA[$P{reportId}]]></textFieldExpression>
 				</textField>
 				<textField evaluationTime="Master" isBlankWhenNull="true">
-					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="450" y="30" width="69" height="15" isRemoveLineWhenBlank="true" uuid="999ccb09-23d6-45b9-b29f-c83c8ad2452e">
+					<reportElement positionType="Float" x="450" y="30" width="69" height="15" isRemoveLineWhenBlank="true" uuid="999ccb09-23d6-45b9-b29f-c83c8ad2452e">
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
@@ -865,7 +865,7 @@ $P{invDate}]]></textFieldExpression>
 					<textFieldExpression><![CDATA[$V{MASTER_CURRENT_PAGE}+" / "+$V{MASTER_TOTAL_PAGES}]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="380" y="45" width="70" height="15" isRemoveLineWhenBlank="true" uuid="7c072e0e-cc82-4841-a5fd-7ea2d180787c">
+					<reportElement positionType="Float" x="380" y="45" width="70" height="15" isRemoveLineWhenBlank="true" uuid="7c072e0e-cc82-4841-a5fd-7ea2d180787c">
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
 					<box leftPadding="0"/>
@@ -875,7 +875,7 @@ $P{invDate}]]></textFieldExpression>
 					<textFieldExpression><![CDATA[com.ss.wms.util.ReportBilingualUtils.getMessageByLang("L1241",$P{language})+" : "]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
-					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="380" y="30" width="70" height="15" isRemoveLineWhenBlank="true" uuid="e8388169-3c6b-4b29-8732-1547d86b97fd">
+					<reportElement positionType="Float" x="380" y="30" width="70" height="15" isRemoveLineWhenBlank="true" uuid="e8388169-3c6b-4b29-8732-1547d86b97fd">
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
 					<box leftPadding="0"/>
