@@ -324,7 +324,7 @@ $P{wareHouseCode}
 						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
 					<textField textAdjust="StretchHeight">
-						<reportElement positionType="Float" stretchType="ElementGroupHeight" x="330" y="1" width="50" height="15" uuid="d4a3e394-9ed9-4153-8e23-c2653d35302f">
+						<reportElement positionType="Float" stretchType="ElementGroupHeight" x="330" y="0" width="50" height="15" uuid="d4a3e394-9ed9-4153-8e23-c2653d35302f">
 							<property name="com.jaspersoft.studio.unit.width" value="px"/>
 							<property name="com.jaspersoft.studio.unit.height" value="px"/>
 						</reportElement>
@@ -365,7 +365,7 @@ $P{wareHouseCode}
 						<textFieldExpression><![CDATA[com.ss.wms.util.ReportBilingualUtils.getMessageByLang("L9463",$P{language})]]></textFieldExpression>
 					</textField>
 					<textField textAdjust="StretchHeight">
-						<reportElement positionType="Float" stretchType="ElementGroupHeight" x="300" y="1" width="30" height="15" uuid="4e12a53d-d0da-41d4-a0bc-cc28f4d6b76c">
+						<reportElement positionType="Float" stretchType="ElementGroupHeight" x="300" y="0" width="30" height="15" uuid="4e12a53d-d0da-41d4-a0bc-cc28f4d6b76c">
 							<property name="com.jaspersoft.studio.unit.width" value="px"/>
 							<property name="com.jaspersoft.studio.unit.height" value="px"/>
 						</reportElement>
@@ -385,7 +385,7 @@ $P{wareHouseCode}
 						<textFieldExpression><![CDATA[com.ss.wms.util.ReportBilingualUtils.getMessageByLang("L10139",$P{language})]]></textFieldExpression>
 					</textField>
 					<textField textAdjust="StretchHeight">
-						<reportElement positionType="Float" stretchType="ElementGroupHeight" x="450" y="0" width="68" height="15" uuid="8ae8dfa0-b407-4037-bd72-7cf9eed57058">
+						<reportElement positionType="Float" stretchType="ElementGroupHeight" x="450" y="0" width="69" height="15" uuid="8ae8dfa0-b407-4037-bd72-7cf9eed57058">
 							<property name="com.jaspersoft.studio.unit.width" value="px"/>
 							<property name="com.jaspersoft.studio.unit.height" value="px"/>
 						</reportElement>
@@ -482,7 +482,7 @@ $P{wareHouseCode}
 						<textFieldExpression><![CDATA[com.ss.wms.util.ReportBilingualUtils.getMessageByLang("L10145", $P{language})+" : "]]></textFieldExpression>
 					</textField>
 					<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-						<reportElement positionType="Float" x="300" y="1" width="80" height="15" uuid="cd8b318a-ad60-4d95-87f6-871b0bf7cfc1">
+						<reportElement positionType="Float" x="300" y="0" width="80" height="15" uuid="cd8b318a-ad60-4d95-87f6-871b0bf7cfc1">
 							<property name="com.jaspersoft.studio.unit.height" value="px"/>
 						</reportElement>
 						<box bottomPadding="1"/>
@@ -773,7 +773,7 @@ $P{invDate}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
-				<reportElement stretchType="ElementGroupHeight" x="0" y="0" width="519" height="60" isRemoveLineWhenBlank="true" uuid="012c158e-c3ab-42f1-bfcf-b2e9c2aba1c1">
+				<reportElement x="0" y="0" width="519" height="60" isRemoveLineWhenBlank="true" uuid="012c158e-c3ab-42f1-bfcf-b2e9c2aba1c1">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<printWhenExpression><![CDATA[$P{outputFormat}.equals( "1" )?  ($V{PAGE_NUMBER}.equals(1) ? true : false) : true]]></printWhenExpression>
 				</reportElement>
@@ -787,7 +787,7 @@ $P{invDate}]]></textFieldExpression>
 					<textFieldExpression><![CDATA[$P{reportName}]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="0" y="45" width="94" height="15" isRemoveLineWhenBlank="true" uuid="4e9ffbd6-e8f8-495b-a9b6-6c3328ce3227">
+					<reportElement positionType="Float" x="0" y="45" width="94" height="15" isRemoveLineWhenBlank="true" uuid="4e9ffbd6-e8f8-495b-a9b6-6c3328ce3227">
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
@@ -797,7 +797,7 @@ $P{invDate}]]></textFieldExpression>
 					<textFieldExpression><![CDATA[com.ss.wms.util.ReportBilingualUtils.getMessageByLang("L1240",$P{language})+" : "]]></textFieldExpression>
 				</textField>
 				<componentElement>
-					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="94" y="45" width="286" height="15" isRemoveLineWhenBlank="true" uuid="9f54934d-f12c-4cb0-956e-233e434097cf">
+					<reportElement positionType="Float" x="94" y="45" width="286" height="15" isRemoveLineWhenBlank="true" uuid="9f54934d-f12c-4cb0-956e-233e434097cf">
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
 					<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
@@ -812,7 +812,7 @@ $P{invDate}]]></textFieldExpression>
 						</datasetRun>
 						<jr:listContents height="15" width="286">
 							<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-								<reportElement positionType="Float" stretchType="ElementGroupHeight" x="0" y="0" width="270" height="15" isRemoveLineWhenBlank="true" uuid="c0458a43-6934-4351-9662-4c596cbff4a5">
+								<reportElement positionType="Float" stretchType="ElementGroupHeight" x="0" y="0" width="286" height="15" isRemoveLineWhenBlank="true" uuid="c0458a43-6934-4351-9662-4c596cbff4a5">
 									<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 								</reportElement>
 								<textElement textAlignment="Left" verticalAlignment="Middle">
@@ -825,7 +825,7 @@ $P{invDate}]]></textFieldExpression>
 					</jr:list>
 				</componentElement>
 				<textField textAdjust="StretchHeight" pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
-					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="450" y="45" width="69" height="15" isRemoveLineWhenBlank="true" uuid="7c9741c8-00e9-49a3-8dc8-e90663728858">
+					<reportElement positionType="Float" x="450" y="45" width="69" height="15" isRemoveLineWhenBlank="true" uuid="7c9741c8-00e9-49a3-8dc8-e90663728858">
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
 					<box leftPadding="0"/>
@@ -868,7 +868,7 @@ $P{invDate}]]></textFieldExpression>
 					<textFieldExpression><![CDATA[$V{MASTER_CURRENT_PAGE}+" / "+$V{MASTER_TOTAL_PAGES}]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-					<reportElement positionType="Float" stretchType="ElementGroupHeight" x="380" y="45" width="70" height="15" isRemoveLineWhenBlank="true" uuid="7c072e0e-cc82-4841-a5fd-7ea2d180787c">
+					<reportElement positionType="Float" x="380" y="45" width="70" height="15" isRemoveLineWhenBlank="true" uuid="7c072e0e-cc82-4841-a5fd-7ea2d180787c">
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
 					<box leftPadding="0"/>
@@ -966,7 +966,7 @@ $P{invDate}]]></textFieldExpression>
 					<textFieldExpression><![CDATA[$F{PEA_NO_FROM}]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-					<reportElement stretchType="ElementGroupHeight" x="450" y="0" width="68" height="15" uuid="c068b4ef-328c-4c7e-943f-ef923943d802">
+					<reportElement stretchType="ElementGroupHeight" x="450" y="0" width="69" height="15" uuid="c068b4ef-328c-4c7e-943f-ef923943d802">
 						<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
